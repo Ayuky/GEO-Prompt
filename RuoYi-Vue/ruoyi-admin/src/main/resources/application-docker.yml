@@ -1,0 +1,36 @@
+# ============================================================
+# Docker 容器环境配置
+# 会覆盖 application.yml / application-druid.yml 中的对应值
+# 启动时通过 SPRING_PROFILES_ACTIVE=druid,docker 激活
+# ============================================================
+
+# 文件上传路径（容器内 Linux 路径）
+ruoyi:
+  profile: /home/ruoyi/uploadPath
+
+# 数据库连接 — 使用容器名代替 localhost
+spring:
+  datasource:
+    druid:
+      master:
+        url: jdbc:mysql://${MYSQL_HOST:mysql}:${MYSQL_PORT:3306}/${MYSQL_DB:ry-vue}?useUnicode=true&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&connectionCollation=utf8mb4_unicode_ci
+        username: ${MYSQL_USER:root}
+        password: ${MYSQL_PASSWORD:root}
+
+  # Redis — 使用容器名
+  data:
+    redis:
+      host: ${REDIS_HOST:redis}
+      port: ${REDIS_PORT:6379}
+
+# GeoPrompt Python API 代理地址
+geo:
+  python:
+    api:
+      url: ${GEO_PYTHON_API_URL:http://geoprompt:8000/api/v1}
+
+# Langfuse 地址
+langfuse:
+  base-url: ${LANGFUSE_BASE_URL:http://langfuse-web:3000}
+  public-key: ${LANGFUSE_PUBLIC_KEY:}
+  secret-key: ${LANGFUSE_SECRET_KEY:}

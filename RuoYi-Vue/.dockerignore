@@ -1,0 +1,9 @@
+.git/
+.gitignore
+*.md
+target/
+*.log
+ruoyi-ui/node_modules/
+ruoyi-ui/dist/
+.idea/
+.vscode/
